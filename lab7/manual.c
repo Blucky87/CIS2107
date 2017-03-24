@@ -1,3 +1,13 @@
+/**
+ * Name: Brian Luckenbill
+ * TUID: 915149546
+ * Date: March 24 2017
+ * Course: CIS2107
+ * Section: 003
+ * Homework Number: 7 "Manual"
+ * Objective: To design and implement functions to process characters and strings
+ */
+
 #include <stdio.h>
 #include <malloc.h>
 #include <string.h>
@@ -11,23 +21,38 @@ typedef struct {
     char concat[8];
 }Telephone;
 
-
+//Every other character uppercase then lowercase
 char *lowerUpper(const char *string);
+//takes a pointer to a pointer of strings and converts to them to integers and adds them
 int convertStrtoInt(char **string, unsigned number);
+//takes a pointer to a pointer of strings and converts to them to floats and adds them
 float convertStrtoFloat(char **string, unsigned number);
+//compares two strings and returns a string describing if the 1st is greater than, equal to or less than the second
 char *compareStr(const char *string1, const char *string2);
+//compares two strings up to a certain length and returns a string describing if the 1st is greater than, equal to or less than the second
 char *comparePartialStr(const char *string1, const char *string2, unsigned number);
+//prints a random story composed of preset words
 void randomize();
+//takes a telephone number as a string in the form "(000) 000-0000" and converts portions of it into a int and long
 Telephone *tokenizeTelNum(char string[15]);
+//Takes a string and breaks up by words and prints it in reverse order
 void reverse(char string[]);
+//searches an array of strings for a specific substring and returns how many it found
 int countSubstr(char *search, char *strings[], int numStrings);
+//searches and array of strings for a specific character and returns how many it found
 int countChar(char search, char *strings[], int numStrings);
+//takes an array of strings and prints how many of each alphabet letter it found
 void countAlpha(char *strings[], int numStrings);
+//takes an array of string pointers and returns how many words total it has found
 int countWords(char *strings[], int numStrings);
+//takes an array of string pointers and prints the strings that begin with a 'B' or 'b'
 void startsWithB(char *strings[], int numStrings);
+//takes an array of string pointers and prints only the strings that end in "ed"
 void endsWithed(char *strings[], int numStrings);
 
+//used in the reverse function to get tokens and return how many there are
 int getTokens(char *tokens[], int numTokens, char string[]);
+//returns the given string with the first letter capitalized used in the randomized story
 char *getCapWord(char string[]);
 
 
@@ -38,10 +63,11 @@ int main() {
     char *tempStr3 = "This is a temporary String";
     char *tempStr4 = "This is a temporary String";
     char tempStr5[] = "This is a temporary String";
-    char string2[12] = {'H', 'e', 'l', 'l', 'o', " ", 'W', 'o', 'r', 'l', 'd', '\0'};
+    char string2[12] = {'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd', '\0'};
     char *stringInt[8] = {"1", "2", "3", "4", "5", "1", "2", "99"};
     char *stringFloat[8] = {"1.1", "2.4884", "3.1123", "4.912821", "5.22", "1.88", "2.2", "99.3"};
     char phone[] = "(555) 555-5555";
+    Telephone *telephone = NULL;
     char *tempStrings[4];
 
     printf("\n----------------------------------------------\n\n");
@@ -87,10 +113,10 @@ int main() {
 
     printf("Function tokenizeTelNum:\n\n");
     printf("Input: \"%s\"\n", phone);
-    printf("Output: %d %ld", tokenizeTelNum(phone)->areaCode, tokenizeTelNum(phone)->lineNumber);
+    telephone = tokenizeTelNum(phone);
+    printf("Output: %d %ld", telephone->areaCode, telephone->lineNumber);
 
     printf("\n\n----------------------------------------------\n\n");
-
 
     printf("Function reverse:\n\n");
     printf("Input: \"%s\"\n", tempStr5);
@@ -256,6 +282,7 @@ char *comparePartialStr(const char *string1, const char *string2, unsigned numbe
     return temp;
 }
 
+//it works..
 void randomize(){
     char *article[]     = {"the", "a", "one", "some", "any"};
     char *noun[]        = {"boy", "girl", "dog", "town", "car"};
@@ -286,7 +313,6 @@ void randomize(){
 }
 
 char *getCapWord(char string[]){
-    int i;
     char *tempString = malloc(16);
 
     strcpy(tempString, string);
