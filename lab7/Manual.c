@@ -70,6 +70,9 @@ int main() {
     Telephone *telephone = NULL;
     char *tempStrings[4];
 
+
+
+
     printf("\n----------------------------------------------\n\n");
 
     printf("Function lowerUpper:\n\n");
